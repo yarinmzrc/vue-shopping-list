@@ -20,7 +20,7 @@
     </div>
   </section>
 
-  <Modal @close-modal="toggleButtonAndReset" v-if="toggleModal">
+  <Modal @close-modal="toggleButtonAndReset" v-if="isModalOpen">
     <form @submit.prevent="addItemToList(itemInfo)">
       <div class="input-container">
         <input
@@ -74,9 +74,9 @@ import ShoppingListItem from "../components/ShoppingListItem.vue";
 export default defineComponent({
   name: "ShoppingList",
   setup() {
-    let toggleModal = ref<boolean>(false);
+    let isModalOpen = ref<boolean>(false);
     const toggleButton = () => {
-      toggleModal.value = !toggleModal.value;
+      isModalOpen.value = !isModalOpen.value;
     };
     const addItemToList = (item: TShoppingItem) => {
       addItem(item);
@@ -91,7 +91,7 @@ export default defineComponent({
       items,
       itemInfo,
       totalPrice,
-      toggleModal,
+      isModalOpen,
       toggleButton,
       resetItemInfo,
       addItemToList,

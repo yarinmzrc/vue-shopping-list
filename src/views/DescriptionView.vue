@@ -4,9 +4,9 @@
       <font-awesome-icon icon="fa-solid fa-arrow-left" />
     </div>
   </router-link>
-  <h1 class="header-title">{{ getDescriptionById().name }}</h1>
+  <h1 class="header-title">{{ item.name }}</h1>
   <main>
-    {{ getDescriptionById().description }}
+    {{ item.description }}
   </main>
 </template>
 
@@ -20,14 +20,17 @@ export default defineComponent({
   name: "DescriptionView",
   setup() {
     const route = useRoute();
+
     const getDescriptionById = () => {
       const id = route.params.itemId;
       const item = items.find((item) => item.id === id);
       return item as TShoppingItem;
     };
 
+    const item = getDescriptionById();
+
     return {
-      getDescriptionById,
+      item,
     };
   },
 });
