@@ -1,5 +1,10 @@
-<template late>
-  <h1>{{ getDescriptionById().name }}</h1>
+<template>
+  <router-link to="/">
+    <div class="header-icon">
+      <font-awesome-icon icon="fa-solid fa-arrow-left" />
+    </div>
+  </router-link>
+  <h1 class="header-title">{{ getDescriptionById().name }}</h1>
   <main>
     {{ getDescriptionById().description }}
   </main>
@@ -8,8 +13,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
-import { items } from "../store";
-import { TShoppingItem } from "../store";
+import { items } from "../shoppingItemStore";
+import { TShoppingItem } from "../shoppingItemStore";
 
 export default defineComponent({
   name: "DescriptionView",
@@ -27,3 +32,16 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+.header-icon {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  padding: 8px;
+}
+
+.header-title {
+  flex: 1;
+}
+</style>

@@ -50,6 +50,10 @@ export default defineComponent({
       display: flex;
       justify-content: end;
       padding: 10px;
+
+      .close-btn {
+        cursor: pointer;
+      }
     }
   }
 }

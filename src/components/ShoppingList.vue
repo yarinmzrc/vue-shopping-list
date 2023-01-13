@@ -20,7 +20,7 @@
     </div>
   </section>
 
-  <Modal @close-modal="toggleButton" v-if="toggleModal">
+  <Modal @close-modal="toggleButtonAndReset" v-if="toggleModal">
     <form @submit.prevent="addItemToList(itemInfo)">
       <div class="input-container">
         <input
@@ -66,9 +66,9 @@ import {
   resetItemInfo,
   itemInfo,
   items,
-} from "../store";
+} from "../shoppingItemStore";
 import Modal from "./Modal.vue";
-import { TShoppingItem } from "../store";
+import { TShoppingItem } from "../shoppingItemStore";
 import ShoppingListItem from "../components/ShoppingListItem.vue";
 
 export default defineComponent({
@@ -83,6 +83,10 @@ export default defineComponent({
       resetItemInfo();
       toggleButton();
     };
+    const toggleButtonAndReset = () => {
+      resetItemInfo();
+      toggleButton();
+    };
     return {
       items,
       itemInfo,
@@ -92,6 +96,7 @@ export default defineComponent({
       resetItemInfo,
       addItemToList,
       deleteItem,
+      toggleButtonAndReset,
     };
   },
   components: {
@@ -117,6 +122,7 @@ export default defineComponent({
   }
 
   .add-item {
+    cursor: pointer;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -157,6 +163,7 @@ export default defineComponent({
 }
 
 .add-item-modal {
+  cursor: pointer;
   color: orange;
 }
 </style>

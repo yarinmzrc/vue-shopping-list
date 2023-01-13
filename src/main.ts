@@ -15,10 +15,11 @@ import {
   faCheck,
   faPlus,
   faClose,
+  faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(faTrash, faCheck, faPlus, faClose);
+library.add(faTrash, faCheck, faPlus, faClose, faArrowLeft);
 
 createApp(App)
   .component("font-awesome-icon", FontAwesomeIcon)

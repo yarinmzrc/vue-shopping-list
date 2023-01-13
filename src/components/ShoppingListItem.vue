@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
-import { TShoppingItem } from "../store";
+import { TShoppingItem } from "../shoppingItemStore";
 
 export default defineComponent({
   name: "ShoppingListItem",
