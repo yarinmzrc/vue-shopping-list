@@ -12,6 +12,10 @@
   color: rgb(103, 103, 103);
 }
 
+h1 {
+  font-size: 24px;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

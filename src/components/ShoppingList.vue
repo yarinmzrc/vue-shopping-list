@@ -16,7 +16,7 @@
     <p>Total: {{ totalPrice() }} NIS</p>
     <div class="add-item">
       <font-awesome-icon icon="fa-solid fa-plus" size="md" />
-      <button @click="toggleButton">Add Item</button>
+      <button class="add-item-btn" @click="toggleButton">Add Item</button>
     </div>
   </section>
 
@@ -122,14 +122,16 @@ export default defineComponent({
   }
 
   .add-item {
-    cursor: pointer;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     color: orange;
     font-weight: 500;
+
+    .add-item-btn {
+      cursor: pointer;
+    }
   }
 }
 
