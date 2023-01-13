@@ -1,8 +1,12 @@
 <template>
   <div class="modal">
     <div class="modal-content">
+      <div class="btn-container">
+        <button class="close-btn" @click="handleClose">
+          <font-awesome-icon icon="fa-solid fa-close" size="md" />
+        </button>
+      </div>
       <slot />
-      <button @click="handleClose">Close</button>
     </div>
   </div>
 </template>
@@ -24,6 +28,8 @@ export default defineComponent({
 .modal {
   position: fixed;
   aspect-ratio: 3/4;
+  width: 100vw;
+  overflow: hidden;
   bottom: 0;
   right: 0;
   left: 0;
@@ -39,6 +45,12 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     padding: 20px;
+
+    .btn-container {
+      display: flex;
+      justify-content: end;
+      padding: 10px;
+    }
   }
 }
 </style>

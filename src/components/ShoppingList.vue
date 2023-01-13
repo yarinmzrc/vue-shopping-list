@@ -7,36 +7,52 @@
       v-for="(item, index) in items"
       :key="item.id"
     >
-      <div>{{ index + 1 }}</div>
-      <router-link :to="`/${item.id}`">
-        <div>
-          {{ item.name }} <span>{{ item.price }} NIS</span>
-        </div>
-      </router-link>
-      <div class="shopping-list-icons">
-        <button>CheckDone</button>
-        <button @click="deleteItem(index)">Trash</button>
-      </div>
+      <ShoppingListItem
+        @delete-item="deleteItem(index)"
+        :item="item"
+        :index="index"
+      />
     </div>
     <p>Total: {{ totalPrice() }} NIS</p>
-    <button @click="toggleButton">Add Item</button>
+    <div class="add-item">
+      <font-awesome-icon icon="fa-solid fa-plus" size="md" />
+      <button @click="toggleButton">Add Item</button>
+    </div>
   </section>
 
   <Modal @close-modal="toggleButton" v-if="toggleModal">
     <form @submit.prevent="addItemToList(itemInfo)">
-      <div>
-        <label for="name">Name</label>
-        <input required v-model="itemInfo.name" id="name" type="text" />
+      <div class="input-container">
+        <input
+          class="form-input"
+          required
+          placeholder="Name"
+          v-model="itemInfo.name"
+          id="name"
+          type="text"
+        />
+        <input
+          class="form-input"
+          required
+          placeholder="Price"
+          v-model="itemInfo.price"
+          id="price"
+          type="number"
+        />
       </div>
-      <div>
-        <label for="price">Price</label>
-        <input required v-model="itemInfo.price" id="price" type="number" />
+      <div class="textarea-container">
+        <textarea
+          class="form-input textarea"
+          required
+          height="100"
+          placeholder="Description"
+          v-model="itemInfo.description"
+          id="description"
+        />
+        <button type="submit" class="add-item-modal">
+          <font-awesome-icon icon="fa-solid fa-plus" size="md" />
+        </button>
       </div>
-      <div>
-        <label for="description">Description</label>
-        <textarea required v-model="itemInfo.description" id="description" />
-      </div>
-      <button type="submit">Add Item</button>
     </form>
   </Modal>
 </template>
@@ -53,6 +69,7 @@ import {
 } from "../store";
 import Modal from "./Modal.vue";
 import { TShoppingItem } from "../store";
+import ShoppingListItem from "../components/ShoppingListItem.vue";
 
 export default defineComponent({
   name: "ShoppingList",
@@ -63,6 +80,7 @@ export default defineComponent({
     };
     const addItemToList = (item: TShoppingItem) => {
       addItem(item);
+      resetItemInfo();
       toggleButton();
     };
     return {
@@ -78,6 +96,7 @@ export default defineComponent({
   },
   components: {
     Modal,
+    ShoppingListItem,
   },
 });
 </script>
@@ -87,15 +106,57 @@ export default defineComponent({
 .shopping-list-container {
   display: flex;
   flex-direction: column;
+  padding: 10px;
 
   .shopping-list-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    .shopping-list-icons {
-      display: flex;
-    }
+    padding: 10px;
+    border-bottom: 1px solid rgb(216, 216, 216);
   }
+
+  .add-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: orange;
+    font-weight: 500;
+  }
+}
+
+.input-container {
+  display: flex;
+  width: max-content;
+  gap: 10px;
+  padding: 20px;
+  .form-input {
+    border: none;
+    max-width: 140px;
+    padding: 10px;
+    outline: none;
+    border-bottom: 1px solid rgb(216, 216, 216);
+  }
+}
+
+.textarea-container {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  .textarea {
+    font-family: "Poppins", sans-serif;
+    border: none;
+    overflow: auto;
+    outline: none;
+    width: 100%;
+    height: 300px;
+  }
+}
+
+.add-item-modal {
+  color: orange;
 }
 </style>

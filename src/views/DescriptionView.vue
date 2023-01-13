@@ -1,11 +1,15 @@
 <template late>
-  <div>{{ getDescriptionById() }}</div>
+  <h1>{{ getDescriptionById().name }}</h1>
+  <main>
+    {{ getDescriptionById().description }}
+  </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRoute } from "vue-router";
 import { items } from "../store";
+import { TShoppingItem } from "../store";
 
 export default defineComponent({
   name: "DescriptionView",
@@ -13,8 +17,8 @@ export default defineComponent({
     const route = useRoute();
     const getDescriptionById = () => {
       const id = route.params.itemId;
-      const description = items.find((item) => item.id === id)?.description;
-      return description;
+      const item = items.find((item) => item.id === id);
+      return item as TShoppingItem;
     };
 
     return {

@@ -10,7 +10,7 @@ export type TShoppingItem = {
 
 const items = reactive([] as TShoppingItem[]);
 
-let itemInfo = reactive({
+const itemInfo = reactive({
   name: "",
   price: null,
   description: "",
@@ -28,7 +28,10 @@ const totalPrice = () => {
 };
 
 const resetItemInfo = () => {
-  itemInfo = { name: "", price: null, description: "" };
+  itemInfo.description = "";
+  itemInfo.id = undefined;
+  itemInfo.name = "";
+  itemInfo.price = null;
 };
 
 const addItem = (item: TShoppingItem) => {
@@ -36,7 +39,11 @@ const addItem = (item: TShoppingItem) => {
     (i) => i.name.toLowerCase() === item.name.toLowerCase()
   );
   if (findItemWithSameNameIndex > -1) {
-    items[findItemWithSameNameIndex] = item;
+    items[findItemWithSameNameIndex] = {
+      ...items[findItemWithSameNameIndex],
+      price: item.price,
+      description: item.description,
+    };
   } else {
     const itemWithId = { ...item, id: uuid.v4() };
     items.push(itemWithId);
