@@ -28,7 +28,7 @@ export default defineComponent({
 .modal {
   position: fixed;
   aspect-ratio: 3/4;
-  width: 100vw;
+  max-height: 100vh;
   overflow: hidden;
   bottom: 0;
   right: 0;
