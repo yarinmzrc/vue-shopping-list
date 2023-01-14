@@ -1,4 +1,4 @@
-# vue-shopping-list
+# vue-shopping-list(fixed for mobile)
 
 This App is here to help you with your shopping list.
 If you want to install it just follow the Project Setup.
